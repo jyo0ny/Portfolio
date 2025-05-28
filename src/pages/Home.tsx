@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
 import profile from "../assets/portfolio_profile.png";
 import Typewriter from "@/fancy/components/text/typewriter";
+import { useState, useEffect } from "react";
 
 const Home = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // 클라이언트에서만 렌더링
+  }, []);
   return (
     <section className="h-[calc(100vh-80px)] bg-gradient-to-br from-[#fbfeff] via-[#f0f9ff] to-[#e0f2fe] flex items-center justify-center px-8 overflow-hidden relative">
       {/* 배경 장식 요소들 */}
+
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute -top-20 -left-20 w-40 h-40 bg-blue-50 rounded-full opacity-30"
@@ -45,11 +52,10 @@ const Home = () => {
         />
       </div>
 
-      <div className="flex flex-row items-center justify-center gap-20 mx-auto relative z-10">
+      <div className="flex flex-row items-center justify-center gap-30 mx-auto relative z-10">
         {/* 왼쪽: 프로필 이미지 */}
         <motion.div
           className="w-60 h-60 md:w-80 md:h-80 rounded-[30px] bg-white p-3 shadow-2xl shrink-0 relative"
-          initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
             x: [-120, -80, -50, -30, -10, 0],
@@ -102,14 +108,23 @@ const Home = () => {
 
         {/* 오른쪽: 텍스트 */}
         <motion.div
-          className="flex-1 text-left relative"
+          className="flex-1 text-left relative mt-35"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
         >
+          <motion.p
+            className="text-blue-600 font-bold"
+            style={{ fontSize: "2.5rem" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.8 }}
+          >
+            잘 묻고, 잘 듣고, 잘 만드는
+          </motion.p>
           <motion.h1
             className="font-bold text-gray-800 leading-tight relative"
-            style={{ fontSize: "5rem" }}
+            style={{ fontSize: "4.3rem" }}
             whileHover={{ scale: 1.02 }}
           >
             <motion.span
@@ -124,8 +139,8 @@ const Home = () => {
             <motion.div
               className="text-blue-600 font-extrabold inline-block relative"
               style={{
-                fontSize: "6rem",
-                textShadow: "0 0 0px rgba(59, 130, 246, 0)",
+                fontSize: "5rem",
+                textShadow: "none",
               }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -135,14 +150,21 @@ const Home = () => {
                 textShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
               }}
             >
-              <Typewriter
-                text="서지윤"
-                speed={150}
-                className="text-blue-600 font-extrabold text-8xl"
-              />
+              {isClient && (
+                <Typewriter
+                  text="서지윤"
+                  speed={200}
+                  initialDelay={2000}
+                  className="text-blue-600 font-extrabold text-6xl"
+                  showCursor
+                  cursorChar="|"
+                  cursorClassName="ml-2 text-blue-500 text-5xl"
+                  onFirstTyped={() => console.log("타이핑 시작")}
+                />
+              )}
               <motion.div
-                className="absolute -inset-2 bg-blue-400 opacity-20 rounded-lg -z-10"
-                initial={{ scale: 0 }}
+                // className="absolute -inset-2 bg-blue-400 opacity-20 rounded-lg -z-10"
+                initial={{ scale: 1 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 2.2, duration: 0.5 }}
               />
@@ -151,7 +173,7 @@ const Home = () => {
               className="inline-block"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3, duration: 0.8 }}
+              transition={{ delay: 2, duration: 0.8 }}
             >
               입니다.
             </motion.span>
@@ -324,26 +346,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 3, duration: 0.8 }}
-          >
-            <motion.button
-              className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl"
-              whileHover={{
-                scale: 1.05,
-                boxShadow:
-                  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              프로젝트 보기
-            </motion.button>
-            <motion.button
-              className="px-8 py-4 border-2 border-blue-600 text-blue-600 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              연락하기
-            </motion.button>
-          </motion.div>
+          ></motion.div>
         </motion.div>
       </div>
     </section>

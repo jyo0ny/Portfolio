@@ -1,29 +1,31 @@
-import { useEffect, useState } from "react"
-import { motion, Variants } from "motion/react"
-
-import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react";
+import { motion, Variants } from "framer-motion";
+import { cn } from "@/lib/utils"; // utils 없으면 그냥 제거해도 무방
 
 interface TypewriterProps {
-  text: string | string[]
-  speed?: number
-  initialDelay?: number
-  waitTime?: number
-  deleteSpeed?: number
-  loop?: boolean
-  className?: string
-  showCursor?: boolean
-  hideCursorOnType?: boolean
-  cursorChar?: string | React.ReactNode
+  text: string | string[];
+  speed?: number;
+  initialDelay?: number;
+  waitTime?: number;
+  deleteSpeed?: number;
+  loop?: boolean;
+  className?: string;
+  showCursor?: boolean;
+  hideCursorOnType?: boolean;
+  cursorChar?: string | React.ReactNode;
   cursorAnimationVariants?: {
-    initial: Variants["initial"]
-    animate: Variants["animate"]
-  }
-  cursorClassName?: string
+    initial: Variants["initial"];
+    animate: Variants["animate"];
+  };
+  cursorClassName?: string;
+  onFirstTyped?: () => void;
+  onTypingEnd?: () => void;
+  onDeleteStart?: () => void;
 }
 
 const Typewriter = ({
   text,
-  speed = 50,
+  speed = 150,
   initialDelay = 0,
   waitTime = 2000,
   deleteSpeed = 30,
@@ -34,67 +36,74 @@ const Typewriter = ({
   cursorChar = "|",
   cursorClassName = "ml-1",
   cursorAnimationVariants = {
-    initial: { opacity: 0 },
+    initial: { opacity: 1 },
     animate: {
-      opacity: 1,
+      opacity: [1, 0],
       transition: {
-        duration: 0.01,
+        duration: 0.6,
         repeat: Infinity,
-        repeatDelay: 0.4,
         repeatType: "reverse",
       },
     },
   },
+  onFirstTyped,
+  onTypingEnd,
+  onDeleteStart,
 }: TypewriterProps) => {
-  const [displayText, setDisplayText] = useState("")
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [hasTyped, setHasTyped] = useState(false);
 
-  const texts = Array.isArray(text) ? text : [text]
+  const texts = Array.isArray(text) ? text : [text];
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout
-
-    const currentText = texts[currentTextIndex]
+    let timeout: NodeJS.Timeout;
+    const currentText = texts[currentTextIndex];
 
     const startTyping = () => {
       if (isDeleting) {
         if (displayText === "") {
-          setIsDeleting(false)
-          if (currentTextIndex === texts.length - 1 && !loop) {
-            return
-          }
-          setCurrentTextIndex((prev) => (prev + 1) % texts.length)
-          setCurrentIndex(0)
-          timeout = setTimeout(() => {}, waitTime)
+          setIsDeleting(false);
+          if (currentTextIndex === texts.length - 1 && !loop) return;
+          setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+          setCurrentIndex(0);
+          timeout = setTimeout(() => {}, waitTime);
         } else {
           timeout = setTimeout(() => {
-            setDisplayText((prev) => prev.slice(0, -1))
-          }, deleteSpeed)
+            setDisplayText((prev) => prev.slice(0, -1));
+          }, deleteSpeed);
         }
       } else {
         if (currentIndex < currentText.length) {
           timeout = setTimeout(() => {
-            setDisplayText((prev) => prev + currentText[currentIndex])
-            setCurrentIndex((prev) => prev + 1)
-          }, speed)
+            const nextChar = currentText[currentIndex];
+            setDisplayText((prev) => prev + nextChar);
+            setCurrentIndex((prev) => prev + 1);
+
+            if (!hasTyped) {
+              setHasTyped(true);
+              onFirstTyped?.();
+            }
+          }, speed);
         } else if (texts.length > 1) {
           timeout = setTimeout(() => {
-            setIsDeleting(true)
-          }, waitTime)
+            setIsDeleting(true);
+            onDeleteStart?.();
+          }, waitTime);
+          onTypingEnd?.();
         }
       }
-    }
+    };
 
-    // Apply initial delay only at the start
     if (currentIndex === 0 && !isDeleting && displayText === "") {
-      timeout = setTimeout(startTyping, initialDelay)
+      timeout = setTimeout(startTyping, initialDelay);
     } else {
-      startTyping()
+      startTyping();
     }
 
-    return () => clearTimeout(timeout)
+    return () => clearTimeout(timeout);
   }, [
     currentIndex,
     displayText,
@@ -105,11 +114,28 @@ const Typewriter = ({
     texts,
     currentTextIndex,
     loop,
-  ])
+    hasTyped,
+    onFirstTyped,
+    onTypingEnd,
+    onDeleteStart,
+  ]);
 
   return (
-    <div className={`inline whitespace-pre-wrap tracking-tight ${className}`}>
-      <span>{displayText}</span>
+    <div className="inline whitespace-pre-wrap tracking-tight">
+      {displayText.split("").map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: [0, 1], scale: [0.6, 1.2, 1] }}
+          transition={{ duration: 0.3 }}
+          style={{
+            background: "white",
+            textShadow: "0 0 1px rgba(0,0,0,0.1)",
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
       {showCursor && (
         <motion.span
           variants={cursorAnimationVariants}
@@ -127,7 +153,7 @@ const Typewriter = ({
         </motion.span>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Typewriter
+export default Typewriter;

@@ -55,12 +55,12 @@ const About = () => {
               <div className="space-y-4 text-gray-600 text-lg">
                 <p>
                   저는 사용자 경험을 최우선으로 생각하는 프론트엔드
-                  개발자입니다. 아름답고 직관적인 인터페이스를 통해 사용자와
+                  개발자입니다. 편리하고 직관적인 인터페이스를 통해 사용자와
                   기술 사이의 다리 역할을 하고 있습니다.
                 </p>
                 <p>
-                  3년 이상의 웹 개발 경험을 바탕으로 React, Vue.js, TypeScript
-                  등 최신 기술 스택을 활용하여 성능과 사용성을 모두 고려한 웹
+                  기존의 웹 개발 경험을 바탕으로 React, Vue.js, TypeScript 등
+                  최신 기술 스택을 활용하여 성능과 사용성을 모두 고려한 웹
                   애플리케이션을 개발합니다.
                 </p>
                 <p>
@@ -290,7 +290,7 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span>Node.js</span>
+                  <span>Jira</span>
                   <div className="w-20 bg-gray-200 rounded-full h-2">
                     <div
                       className="bg-green-500 h-2 rounded-full"
@@ -299,7 +299,7 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span>AWS</span>
+                  <span>Django</span>
                   <div className="w-20 bg-gray-200 rounded-full h-2">
                     <div
                       className="bg-green-500 h-2 rounded-full"
