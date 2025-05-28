@@ -30,7 +30,7 @@ const Typewriter = ({
   waitTime = 2000,
   deleteSpeed = 30,
   loop = true,
-  className,
+  // className,
   showCursor = true,
   hideCursorOnType = false,
   cursorChar = "|",
