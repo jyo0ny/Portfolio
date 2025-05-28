@@ -55,7 +55,7 @@ const Home = () => {
       <div className="flex flex-row items-center justify-center gap-30 mx-auto relative z-10">
         {/* 왼쪽: 프로필 이미지 */}
         <motion.div
-          className="w-60 h-60 md:w-80 md:h-80 rounded-[30px] bg-white p-3 shadow-2xl shrink-0 relative"
+          className="w-90 h-90 rounded-[30px] bg-white p-3 shadow-2xl shrink-0 relative"
           animate={{
             opacity: 1,
             x: [-120, -80, -50, -30, -10, 0],

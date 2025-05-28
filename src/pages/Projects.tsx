@@ -1,77 +1,10 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+// import { useState } from "react"; // 필터 기능 주석 처리로 필요 없음
 
 const Projects = () => {
+  // 필터 기능 관련 상태 및 데이터 (주석 처리)
+  /*
   const [selectedFilter, setSelectedFilter] = useState("all");
-
-  const projects = [
-    {
-      id: 1,
-      title: "E-commerce 플랫폼",
-      category: "web",
-      description:
-        "React와 Node.js로 구축한 대규모 쇼핑몰 플랫폼. 실시간 주문 관리와 결제 시스템을 포함합니다.",
-      image: "https://via.placeholder.com/400x250?text=E-commerce+Platform",
-      tags: ["React", "Node.js", "MongoDB", "Stripe"],
-      link: "#",
-      github: "#",
-    },
-    {
-      id: 2,
-      title: "부동산 관리 앱",
-      category: "mobile",
-      description:
-        "React Native로 개발한 부동산 매물 관리 모바일 애플리케이션. 지도 연동과 필터링 기능이 특징입니다.",
-      image: "https://via.placeholder.com/400x250?text=Real+Estate+App",
-      tags: ["React Native", "Firebase", "Google Maps"],
-      link: "#",
-      github: "#",
-    },
-    {
-      id: 3,
-      title: "기업 대시보드",
-      category: "web",
-      description:
-        "Vue.js로 구현한 데이터 시각화 대시보드. 실시간 차트와 리포트 생성 기능을 제공합니다.",
-      image: "https://via.placeholder.com/400x250?text=Business+Dashboard",
-      tags: ["Vue.js", "Chart.js", "REST API"],
-      link: "#",
-      github: "#",
-    },
-    {
-      id: 4,
-      title: "포트폴리오 웹사이트",
-      category: "design",
-      description:
-        "개인 브랜딩을 위한 포트폴리오 웹사이트. 애니메이션과 반응형 디자인에 중점을 두었습니다.",
-      image: "https://via.placeholder.com/400x250?text=Portfolio+Website",
-      tags: ["React", "Framer Motion", "Tailwind CSS"],
-      link: "#",
-      github: "#",
-    },
-    {
-      id: 5,
-      title: "팀 협업 도구",
-      category: "web",
-      description:
-        "TypeScript와 React로 개발한 팀 프로젝트 관리 도구. 실시간 채팅과 태스크 관리 기능을 포함합니다.",
-      image: "https://via.placeholder.com/400x250?text=Team+Collaboration+Tool",
-      tags: ["TypeScript", "React", "Socket.io", "PostgreSQL"],
-      link: "#",
-      github: "#",
-    },
-    {
-      id: 6,
-      title: "헬스케어 앱 UI",
-      category: "design",
-      description:
-        "Figma로 디자인한 헬스케어 모바일 앱 UI/UX. 사용자 친화적인 인터페이스에 중점을 두었습니다.",
-      image: "https://via.placeholder.com/400x250?text=Healthcare+App+UI",
-      tags: ["Figma", "UI/UX Design", "Prototyping"],
-      link: "#",
-      github: "#",
-    },
-  ];
 
   const filters = [
     { key: "all", label: "전체" },
@@ -84,11 +17,61 @@ const Projects = () => {
     selectedFilter === "all"
       ? projects
       : projects.filter((project) => project.category === selectedFilter);
+  */
+
+  const projects = [
+    {
+      id: 1,
+      title: "시시각각",
+      category: "web",
+      description:
+        "CCTV를 활용한 실시간 이상행동 알리미 서비스. 에스원 기업연계 프로젝트로, 실시간 알림, 이벤트 분석, 캘린더 기반 검색 기능을 구현했습니다.",
+      image:
+        "https://via.placeholder.com/400x250?text=%EC%8B%9C%EC%8B%9C%EA%B0%81%EA%B0%81",
+      tags: ["React", "Zustand", "Tailwind"],
+      link: "#",
+      github: "#",
+    },
+    {
+      id: 2,
+      title: "소상고민",
+      category: "web",
+      description:
+        "POS 데이터를 기반으로 한 소상공인을 위한 맞춤 분석 서비스. 경쟁사 비교, 리뷰 시각화, 매장 인사이트 기능을 포함합니다.",
+      image:
+        "https://via.placeholder.com/400x250?text=%EC%86%8C%EC%83%81%EA%B3%A0%EB%AF%BC",
+      tags: ["React", "Zustand", "Chart.js", "Tailwind"],
+      link: "#",
+      github: "#",
+    },
+    {
+      id: 3,
+      title: "Antswer",
+      category: "web",
+      description:
+        "텍스트 중심의 실시간 회의 협업 툴. 실시간 채팅, 투표, 주목 등 소통 및 화상 통화 기능을 통해 회의 효율을 극대화했습니다.",
+      image: "https://via.placeholder.com/400x250?text=Antswer",
+      tags: ["React", "Zustand", "Chart.js", "Tailwind", "WebSocket"],
+      link: "#",
+      github: "#",
+    },
+    {
+      id: 4,
+      title: "CineLog",
+      category: "web",
+      description:
+        "개인 취향 기반 영화 추천 및 기록 서비스. TMDB API를 활용해 사용자 맞춤형 추천 기능과 리뷰 기록 기능을 제공합니다.",
+      image: "https://via.placeholder.com/400x250?text=CineLog",
+      tags: ["Vue", "TMDB API", "Django"],
+      link: "#",
+      github: "#",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16">
+      <section className="bg-blue-600 text-white py-16">
         <div className="max-w-6xl mx-auto px-8">
           <motion.div
             className="text-center"
@@ -104,7 +87,8 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Filter Section */}
+      {/* Filter Section (현재 비활성화됨) */}
+      {/*
       <section className="py-12 bg-white">
         <div className="max-w-6xl mx-auto px-8">
           <motion.div
@@ -131,22 +115,23 @@ const Projects = () => {
           </motion.div>
         </div>
       </section>
+      */}
 
       {/* Projects Grid */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-25 bg-gray-50">
         <div className="max-w-6xl mx-auto px-8">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             layout
           >
-            {filteredProjects.map((project, index) => (
+            {projects.map((project, _) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
                 className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <div className="relative overflow-hidden">
@@ -161,7 +146,7 @@ const Projects = () => {
                         href={project.link}
                         className="bg-white text-blue-600 px-4 py-2 rounded-full font-medium hover:bg-blue-50 transition-colors"
                       >
-                        Live Demo
+                        Figma
                       </a>
                       <a
                         href={project.github}
@@ -194,70 +179,6 @@ const Projects = () => {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-8">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              프로젝트 성과
-            </h2>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-4 gap-8"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">15+</div>
-              <div className="text-gray-600">완료된 프로젝트</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">50+</div>
-              <div className="text-gray-600">만족한 클라이언트</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">18+</div>
-              <div className="text-gray-600">개발 경험 (월)</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">100%</div>
-              <div className="text-gray-600">프로젝트 성공률</div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-        <div className="max-w-4xl mx-auto px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold mb-6">
-              다음 프로젝트는 여러분과 함께!
-            </h2>
-            <p className="text-xl mb-8 text-blue-100">
-              새로운 프로젝트에 대한 아이디어가 있으시나요? 함께 논의해보세요.
-            </p>
-            <button className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-              프로젝트 상담하기
-            </button>
           </motion.div>
         </div>
       </section>
