@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import idphoto from "../assets/idphoto.png";
+import myprofile from "../assets/myprofile.png";
 
 const About = () => {
   return (
@@ -32,7 +32,7 @@ const About = () => {
               <div className="relative">
                 <div className="w-full max-w-md mx-auto">
                   <img
-                    src={idphoto}
+                    src={myprofile}
                     alt="서지윤 프로필"
                     className=" h-80 px-15 object-cover "
                   />
